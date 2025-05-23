@@ -1,3 +1,5 @@
+// JOSEPHSON REYNOSO - QA WOLF Assignment
+
 // EDIT THIS FILE TO COMPLETE ASSIGNMENT QUESTION 1
 const { chromium } = require("playwright");
 
