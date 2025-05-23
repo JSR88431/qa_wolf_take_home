@@ -41,10 +41,7 @@ async function sortHackerNewsArticles() {
       if (articles.length < 100) {
         const moreLink = await page.$("a.morelink");
         if (moreLink) {
-          await Promise.all([
-            page.waitForNavigation(),
-            moreLink.click()
-          ]);
+          await moreLink.click({ waitUntil: 'load' });
           await page.waitForSelector("tr.athing"); // wait for content again
         } else {
           break;
@@ -56,11 +53,11 @@ async function sortHackerNewsArticles() {
     const timestamps = top100.map(a => a.timestamp);
     const sorted = await isSortedDescending(timestamps);
 
-    console.log(`✅ Collected ${top100.length} articles.`);
-    console.log(`📌 Articles are sorted newest to oldest: ${sorted}`);
+    console.log(`Collected ${top100.length} articles.`);
+    console.log(`Articles are sorted newest to oldest: ${sorted}`);
 
   } catch (error) {
-    console.error("❌ Error:", error);
+    console.error("Error:", error);
   } finally {
     await browser.close();
   }
